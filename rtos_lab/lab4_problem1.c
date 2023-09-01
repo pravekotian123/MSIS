@@ -7,6 +7,7 @@
 int main(void)
 {
     
+    
     int id = 0;
     id = fork();
     if(id > 0)
