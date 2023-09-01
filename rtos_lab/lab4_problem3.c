@@ -38,11 +38,7 @@ int main(void)
         }
         else if(id == 0)
         {
-            id = fork();
-            if(id == 0)
-            {
-                execl("/bin/gcc","gcc","-o","output","display_100_odd.c",NULL);
-            }
+            execl("/bin/gcc","gcc","-o","output","display_100_odd.c",NULL);
         }
         
     }
