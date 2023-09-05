@@ -38,6 +38,6 @@ public Book (String name, Author author, double price) { ...... }
 ```javascript I'm B tab
 public Book (String name, Author author, double price, int qty) { ...... }
 ```
-· public methods getName(), getAuthor(), getPrice(), setPrice(), getQty(), setQty().
+> · public methods getName(), getAuthor(), getPrice(), setPrice(), getQty(), setQty().
 · A toString() that returns "Book[name=?,Author[name=?,email=?,gender=?],price=?,qty=?". You should reuse Author’s toString().
 Write the Book class (which uses the Author class). Also write a test driver called TestBook to test all the public methods in the class Book. Take Note that you have to construct an instance of Author before you can construct an instance of Book.
