@@ -26,3 +26,17 @@ b. Modify the program to produce the following form of Floyd's triangle 1 0 1 1 
 > 2. A book shop maintains the inventory of books that are being sold at the shop. The list includes details such as author, title, price, publisher and stock position. Whenever a customer wants a book, the sales person inputs the title and author and the system searches the list and displays whether it is available or not. If it is not, an appropriate message is displayed. If it is, then the system displays the book details and requests for the number of copies required. If the requested copies are available, the total cost of the requested copies is displayed; otherwise the message "required copies not in stock" is displayed. Design a system using a class called books with suitable member functions and constructors
 
 > 3. Develop Stack with following operations i) createNew( ) ii) push( ) iii) pop( ) iv) display( ) v) empty( )
+
+## Lab4
+
+> A class called Book is designed (as shown in the class diagram) to model a book written by one author. It contains:
+· Four private instance variables: name (String), author (of the class Author you have just created, assume that a book has one and only one author), price (double), and qty (int);
+· Two constructors:
+```javascript I'm A tab
+console.log('Code Tab A');
+```
+public Book (String name, Author author, double price) { ...... }
+public Book (String name, Author author, double price, int qty) { ...... }
+· public methods getName(), getAuthor(), getPrice(), setPrice(), getQty(), setQty().
+· A toString() that returns "Book[name=?,Author[name=?,email=?,gender=?],price=?,qty=?". You should reuse Author’s toString().
+Write the Book class (which uses the Author class). Also write a test driver called TestBook to test all the public methods in the class Book. Take Note that you have to construct an instance of Author before you can construct an instance of Book.
