@@ -184,47 +184,144 @@ int DeleteAtBegining(struct LinkedList * my_list)
     int return_value  = -1;
     if(my_list != NULL)
     {
-        struct Node *temp;
-        for(temp = my_list->head;(temp != NULL) && (temp->data != data);temp = temp->ptr );
         
-        if(temp != NULL)
+        if(my_list->head != NULL)
         {
-           struct Node *new_node = GetNode(element); 
-           if(new_node != NULL)
-           {
-                new_node->ptr = temp->ptr;
-                temp->ptr = new_node;
-                my_list->count++;
-                UpdateTailAtCorners(my_list);
-                return_value = 0;
-           }
+            struct Node *temp = my_list->head;
+            my_list->head = temp->ptr;
+            free(temp);
+            my_list->count--;
+            UpdateTailAtCorners(my_list);
+            return_value = 0;
         }
     }
     return return_value;
 }
-/*
-int insert_after_data(List *my_list, int data, int element)
+
+int DeleteAtEnd(struct LinkedList * my_list)
 {
-    Node * new_node, *temp;
-
-    if(my_list->count == 0) return FAILED; // check if list is empty
-    // check if the element is the last node then insert at the end
-    if(my_list->tail->data == element) return insert_at_end(my_list, data);
-    // traverse through the list and find the position of element
-    for(temp = my_list->head; temp!=NULL && temp->data != element;temp = temp->ptr);
-    // if element not found
-    if(temp == NULL)
-        return FAILED;
-    // if element found
-    new_node = get_node(data); // create new node
-    //make necessary connection
-    new_node->ptr = temp->ptr;
-    temp->ptr = new_node;
-
-    my_list->count++;
-
-    return INSERT_SUCCESS;
+    int return_value  = -1;
+    if((my_list != NULL) && (my_list->head != NULL))
+    {
+        struct Node *temp = my_list->head;
+        if(temp->ptr == NULL)
+        {
+            free(temp);
+            my_list->head = NULL;
+            
+        }
+        else{
+            while(temp->ptr->ptr != NULL)
+            {   
+                temp = temp->ptr;
+            }
+            free(temp->ptr);
+            temp->ptr = NULL;
+            my_list->tail = temp;
+        }
+         my_list->count--;
+        UpdateTailAtCorners(my_list);
+        return_value = 0;
+    }
+    return return_value;
 }
+
+int DeleteData(struct LinkedList * my_list,int data)
+{
+    int return_value  = -1;
+    if((my_list != NULL) && (my_list->head != NULL))
+    {
+        struct Node *temp = my_list->head;
+        if(temp->data == data)
+        {
+            my_list->head = temp->ptr;
+            free(temp);
+            return_value = 0;
+        }
+        else
+        {
+            while((temp->ptr != NULL) && (temp->ptr->data != data))
+            {
+                temp = temp->ptr;
+            }
+            if(temp->ptr != NULL)
+            {
+                struct Node *backup_node = temp->ptr;
+                temp->ptr = temp->ptr->ptr;
+                free(backup_node);
+                my_list->count--;
+                return_value = 0;
+            }
+
+        }
+        UpdateTailAtCorners(my_list);
+        
+    }
+    return return_value;
+}
+
+int SearchElement(struct LinkedList * my_list,int data)
+{
+    int return_value  = -1;
+    int pos_value = 0;
+    if((my_list != NULL) && (my_list->head != NULL))
+    {
+        struct Node *temp = my_list->head;
+        while((temp != NULL) && (temp->data != data))
+        {
+            temp = temp->ptr;
+            pos_value++;
+        }
+        if(temp != NULL)
+        {
+            return_value = pos_value + 1;
+        } 
+    }
+    return return_value;
+}
+
+int MergeList(struct LinkedList * my_list1,struct LinkedList * my_list2)
+{
+    int return_value  = -1;
+    if((my_list1 != NULL) && (my_list2 != NULL))
+    {
+        struct Node *temp = my_list1->head;
+        if(temp == NULL)
+        {
+            my_list1->head = my_list2->head;
+        }
+        else{
+            while((temp->ptr != NULL))
+            {
+                temp = temp->ptr;
+            }
+            temp->ptr = my_list2->head;
+        }
+        my_list1->tail = my_list2->tail;
+        my_list1->count += my_list2->count ;
+        return_value = 0;
+        /*call free list function*/
+    }
+    return return_value;
+}
+
+
+struct LinkedList * MergeList(struct LinkedList * my_list1,int split_index)
+{
+    struct LinkedList *new_list = NULL;
+    if((my_list1 != NULL) && (split_index > 0))
+    {
+        new_list = InitializeList();
+        if(new_list == NULL)
+        {
+            /*not implememnted*/
+        
+        }
+    }
+    return new_list;
+}
+/*
+
 
 //Lab exercise
 int insert_at_pos(List *my_list, int data, int pos);

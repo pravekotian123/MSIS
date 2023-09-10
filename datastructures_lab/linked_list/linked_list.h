@@ -24,16 +24,15 @@ int InsertAtBegining(struct LinkedList * my_list, int data);
 int InsertAtEnd(struct LinkedList * my_list, int data);
 int InsertAfterData(struct LinkedList * my_list, int data, int element);
 int InsertAtPosition(struct LinkedList * my_list, int data, int position);
+int DeleteAtBegining(struct LinkedList * my_list);
+int DeleteAtEnd(struct LinkedList * my_list);
 int DisplayData(struct LinkedList * my_list);
-
+int DeleteData(struct LinkedList * my_list,int data);
+int SearchElement(struct LinkedList * my_list,int data);
+int MergeList(struct LinkedList * my_list1,struct LinkedList * my_list2);
 /*
-int search_list(List *, int element);
-int merge_list(List *, List *);
 int split_list(List *, int split_index);
 
-int delete_at_beg(List *);
-int delete_at_end(List *);
-int delete_element(List *, int element);
 
 List * free_list(List *); // deallocate memory of the list
 */
