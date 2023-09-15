@@ -32,6 +32,7 @@ int main(void)
         else if(id == 0)
         {
             printf("i'm 2nd child \n");
+            execl("/bin/date","date",NULL);
             
         }
         else if(id >0 )
@@ -59,7 +60,7 @@ int main(void)
             }
             
         }
-        printf("I'm parent my id\n");
+      
         
     }
     return 0;
