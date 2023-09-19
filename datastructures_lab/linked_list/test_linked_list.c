@@ -9,7 +9,9 @@ int main(void)
     assert(list_ptr != NULL);
     assert(list_ptr1 != NULL);
     assert(InsertAtEnd(list_ptr,8) == 0);
-    //assert(InsertAtEnd(list_ptr1,20) == 0);
+    assert(InsertAtEnd(list_ptr1,20) == 0);
+    assert(InsertAtEnd(list_ptr,30) == 0);
+    DisplayData(list_ptr);
     //assert(InsertAtEnd(list_ptr1,25) == 0);
     assert(InsertAtBegining(list_ptr,12) == 0);
     assert(InsertAtBegining(list_ptr,10) == 0);

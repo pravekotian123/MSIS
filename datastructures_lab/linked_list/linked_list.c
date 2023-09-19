@@ -107,6 +107,7 @@ int InsertAtEnd(struct LinkedList * my_list, int data)
             }
             else{
                 my_list->tail->ptr = new_node;
+                my_list->tail = new_node;
             }
             my_list->count++;
             UpdateTailAtCorners(my_list);
@@ -305,6 +306,7 @@ int MergeList(struct LinkedList * my_list1,struct LinkedList * my_list2)
     return return_value;
 }
 
+/*
 
 struct LinkedList * MergeList(struct LinkedList * my_list1,int split_index)
 {
@@ -314,13 +316,13 @@ struct LinkedList * MergeList(struct LinkedList * my_list1,int split_index)
         new_list = InitializeList();
         if(new_list == NULL)
         {
-            /*not implememnted*/
+           // 
         
         }
     }
     return new_list;
 }
-/*
+
 
 
 //Lab exercise
