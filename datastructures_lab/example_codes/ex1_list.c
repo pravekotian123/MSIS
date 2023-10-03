@@ -1,8 +1,10 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 #include "ex1_list.h"
 
 static int UpdateTailAtCorners(struct LinkedList * my_list);
+static struct Node * GetNode(struct Student data);;
 
 struct LinkedList * InitializeList()
 {
@@ -17,7 +19,7 @@ struct LinkedList * InitializeList()
 }
 
 /*can be static*/
-struct Node * GetNode(struct Student  data)
+static struct Node * GetNode(struct Student  data)
 {
     struct Node * new_node;
     new_node = (struct Node *)malloc(sizeof(struct Node));
@@ -119,4 +121,33 @@ int DisplayData(struct LinkedList * my_list)
         printf("\n");
     }
     return return_value;
+}
+
+int SearchElementByName(struct LinkedList * my_list,char *name)
+{
+    int return_value = -1;
+    if(my_list != NULL)
+    {
+        struct Node *temp ;
+        for(temp = my_list->head;temp !=NULL;temp = temp->ptr )
+        {
+            if(strcmp(temp->data.name,name) == 0)
+            {
+                return_value = 0;
+                break;
+            }
+            
+        }
+    }
+    return return_value;
+}
+
+struct LinkedList *FreeList(struct LinkedList * my_list)
+{
+    if(my_list != NULL)
+    {
+        while(DeleteAtEnd(my_list) != -1);
+        free(my_list);
+    }
+    return NULL;
 }

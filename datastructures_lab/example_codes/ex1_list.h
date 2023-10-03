@@ -29,15 +29,9 @@ struct LinkedList
 
 
 struct LinkedList * InitializeList();
-struct Node * GetNode(struct Student data);
+
 int InsertAtBegining(struct LinkedList * my_list, struct Student data);
-int InsertAtEnd(struct LinkedList * my_list, struct Student data);
-int InsertAfterData(struct LinkedList * my_list, int data, struct Student element);
-int InsertAtPosition(struct LinkedList * my_list, int data, struct Student position);
-int DeleteAtBegining(struct LinkedList * my_list);
 int DeleteAtEnd(struct LinkedList * my_list);
-int DisplayData(struct LinkedList * my_list);
-int DeleteData(struct LinkedList * my_list,struct Student data);
-int SearchElement(struct LinkedList * my_list,struct Student data);
-int MergeList(struct LinkedList * my_list1,struct LinkedList * my_list2);
+int SearchElementByName(struct LinkedList * my_list,char *name);
+struct LinkedList *FreeList(struct LinkedList * my_list);
 #endif

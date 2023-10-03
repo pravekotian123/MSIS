@@ -23,11 +23,13 @@ struct HistNode
 
 struct HistorySave
 {
-    struct HistNode *head;
+    struct HistNode *head, *tail;
     int count;
 };
 
 struct HistorySave *InitializeHistorySave();
 int AddToHistory(struct HistorySave *my_list, struct OperationDetail data);
-int DisplayHistory(struct HistorySave *my_list);
+struct HistorySave *FreeHistory(struct HistorySave *my_list);
+int DisplayHistory(struct HistorySave * my_list);
+int DeleteHistory(struct HistorySave * my_list);
 #endif
