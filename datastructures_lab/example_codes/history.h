@@ -29,7 +29,7 @@ struct HistorySave
 
 struct HistorySave *InitializeHistorySave();
 int AddToHistory(struct HistorySave *my_list, struct OperationDetail data);
-struct HistorySave *FreeHistory(struct HistorySave *my_list);
 int DisplayHistory(struct HistorySave * my_list);
 int DeleteHistory(struct HistorySave * my_list);
+struct HistorySave *FreeHistory(struct HistorySave *my_list);
 #endif
