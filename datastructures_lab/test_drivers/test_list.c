@@ -18,14 +18,18 @@ int main(void) {
     assert(InsertAtBegining(test_list,&arr[1],sizeof(int)) == 0);
     assert(InsertAtEnd(test_list,&arr[2],sizeof(int)) == 0);
     assert(InsertAtPosition(test_list,&arr[3],sizeof(int),3) == 0);
-    for(int i=0;i <4 ;i++)
+    assert(DeleteAtBegining(test_list) == 0);
+    assert(DeleteAtEnd(test_list) == 0);
+    for(int i=0;i < 2;i++)
         printf("%d \n",*((int *)FetchDataByPosition(test_list,i)));
 
     assert(InsertAtBegining(student_list,&((struct Student){"Paqueta",21}),sizeof(struct Student)) == 0);
     assert(InsertAtEnd(student_list,&((struct Student){"Hope",10}),sizeof(struct Student)) == 0);
     assert(InsertAtBegining(student_list,&((struct Student){"Zaha",10}),sizeof(struct Student)) == 0);
     assert(InsertAtPosition(student_list,&((struct Student){"Awoniyi",10}),sizeof(struct Student),1) == 0);
-    for(int i=0;i <4 ;i++)
+    assert(DeleteAtBegining(student_list) == 0);
+    assert(DeleteAtEnd(student_list) == 0);
+    for(int i=0;i < 2;i++)
         printf("Name = %s, Roll Number = %d \n",((struct Student *)FetchDataByPosition(student_list,i))->name,((struct Student *)FetchDataByPosition(student_list,i))->roll_number);
     return 0;
 }
