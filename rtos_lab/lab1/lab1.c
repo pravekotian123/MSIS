@@ -3,15 +3,23 @@
 #include <assert.h>
 #include <limits.h>
 #include "lab1.h"
+
 int main(void)
 {
     
     int value_array[ARRAY_LENGTH] = {9,8,2,3,4,5,1,-8,3,8};
+    char str_array[100];
     int lengtha = 0,lengthb = 0;
+    int lenalpha = 0,lenws =0;
     assert(SmallestElementInArray(value_array,ARRAY_LENGTH) == -8);
     assert(ArrayValueScaler(value_array,ARRAY_LENGTH,SCALE_DATA) == 0);
     assert(StringLength("hello") == 5);
     assert(SearchAorB("",&lengtha,&lengthb) == 0);
+    assert(AlphabetsAndWhitechar(&lenalpha,&lenws) == 0);
+    assert(WhiteCharCounter(str_array,100,&lenws) == 0);
+    printf("lena = %d lenb = %d\n",lengtha,lengthb);
+    printf("lenalpha = %d lenws = %d\n",lenalpha,lenws);
+    printf("%s",str_array);
     for(int i=0;i<ARRAY_LENGTH;i++)
     {
         printf("%d ",*(value_array+i));
@@ -104,4 +112,76 @@ int SearchAorB(const char *str_ptr,int *lena,int *lenb)
         }
     }
     return return_value;
+}
+
+int AlphabetsAndWhitechar(int *alpha_len,int *whitespace_len)
+{
+    int return_value  = -1;
+    char c;
+    *alpha_len = 0;
+    *whitespace_len = 0;
+    if((alpha_len != NULL) && (whitespace_len != NULL))
+    {
+        printf("Enter line of data terminated with \\n \n");
+        while((c = getchar())!= '\n')
+        {
+            if(((c >= 'A')&&(c <= 'Z')) || ((c >= 'a')&&(c <= 'z')))
+            {
+                return_value = 0;
+                (*alpha_len)++;
+            }
+            else if((c == ' ') || (c == '\t'))
+            {
+                return_value= 0;
+                (*whitespace_len)++;
+            }
+        }
+    }
+    return return_value;
+}
+
+int WhiteCharCounter(char *str,int maxlimit,int *whitespace_len)
+{
+    int return_value  = -1;
+    int max_len = 0;
+    int length_counter = 0;
+    int str_length_counter = 0;
+    char c;
+    *whitespace_len = 0;
+    if(whitespace_len != NULL)
+    {
+        return_value= 0;
+        printf("Enter max length\n");
+        scanf("%d",&max_len);
+        printf("Enter %d characters \n",max_len);
+        while((c = getchar())!= EOF)
+        {
+            if(length_counter < max_len)
+            {
+                if(str_length_counter >= maxlimit)
+                {
+                    *(str + str_length_counter) = '\0';
+                    
+                    break;
+                }
+                length_counter++;
+
+            }  
+            else {
+                *(str + str_length_counter) = '\0';
+                break;
+            }
+            if((c == ' ') || (c == '\t')||(c == '\n'))
+            {
+                (*whitespace_len)++;
+            }
+            else
+            {
+                *(str+str_length_counter) = c;
+                str_length_counter++;
+            }
+
+        }
+    }
+     return return_value;
 }
