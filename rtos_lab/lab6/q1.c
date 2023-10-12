@@ -1,41 +1,42 @@
-/********************************************************************
-**********************
-(Q)
-Create 3 threads.
-Each thread displays a message n times.
-n is read from the user and is passed as an argument while creating
-the threads
-*********************************************************************
-***************/
 #include <stdio.h>
-#include <pthread.h>
-#include <sys/types.h>
+#include <stdlib.h>
+#include <stdint.h>
+#include <string.h>
+#include <ctype.h>
+#include <sys/shm.h>
+#include <sys/stat.h>
+#include <sys/wait.h>
 #include <unistd.h>
-void* f1(void*);
-pthread_t t1;
-int main()
-{
-    pthread_attr_t a1;
-    int pid, n;
-    printf("Enter upper limit\n");
-    scanf("%d",&n);
-    printf("Main: My pid is %d\n\n", getpid());
-    pthread_attr_init(&a1);
-    pthread_create(&t1,&a1,f1,&n);
-    pthread_join(t1,NULL);
 
-    return 0;
-}
-void* f1(void *ptr)
+int main(void)
 {
-    int sum = 0,i = 0;
-    while(((sum + i) <= *((int *)ptr)) && (i<25))
+    int segment_id;
+    char *sm;
+    segment_id = shmget(IPC_PRIVATE,52,S_IRUSR|S_IWUSR);
+    sm = (char *)shmat(segment_id,NULL,0);
+    sprintf(sm, "ABCDEFGHIJKLMANOPQRSTUVWXYZABCDEFGHIJKLMANOPQRSTUVWXYZ");
+    printf("I'm parent..attached address is %p value is %s\n",sm,sm);
+    int id = fork();
+    if(id > 0)
     {
-        sum +=i++;
+        int status ;
+        waitpid(id,&status,0);
+        printf("I'm parent..attached address is %p value is %s\n",sm,sm);
     }
-    printf("Thread id is: %d\n",pthread_self());
-    printf("Sum is: %d\n",sum);
-
-    pthread_exit(NULL);
-    return NULL;
+    else if(id == 0)
+    {
+        char *temp;
+        sm = (char *)shmat(segment_id,NULL,0);
+        temp = sm;
+        while(*temp != '\0')
+        {
+            *temp = (char ) tolower((int )*temp);
+            temp++;
+        }
+        *temp = (char ) tolower((int )*temp++);
+        printf("I'm child..attached address is %p value is %s\n",sm,sm);
+    }
+    shmdt(sm);
+    shmctl(segment_id,IPC_RMID,NULL);
+    return 0;
 }
