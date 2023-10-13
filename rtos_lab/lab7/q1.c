@@ -31,9 +31,9 @@ void* f1(void *ptr)
     int sum = 0,i = 0;
     while(((sum + i) <= *((int *)ptr)) && (i<25))
     {
-        sum +=i++;
+        sum += i++;
     }
-    printf("Thread id is: %d\n",pthread_self());
+    printf("Thread id is: %lu\n",pthread_self());
     printf("Sum is: %d\n",sum);
 
     pthread_exit(NULL);
