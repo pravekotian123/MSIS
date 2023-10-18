@@ -12,7 +12,7 @@ int main(void)
 {
     int segment_id;
     char *sm;
-    segment_id = shmget(IPC_PRIVATE,52,S_IRUSR|S_IWUSR);
+    segment_id = shmget(IPC_PRIVATE,53,S_IRUSR|S_IWUSR);
     sm = (char *)shmat(segment_id,NULL,0);
     sprintf(sm, "ABCDEFGHIJKLMANOPQRSTUVWXYZABCDEFGHIJKLMANOPQRSTUVWXYZ");
     printf("I'm parent..attached address is %p value is %s\n",sm,sm);
