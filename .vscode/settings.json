@@ -3,6 +3,7 @@
         "string.h": "c",
         "stdlib.h": "c",
         "stdio.h": "c",
-        "atomic": "c"
+        "atomic": "c",
+        "linked_list.h": "c"
     }
 }
