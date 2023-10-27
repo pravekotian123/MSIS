@@ -13,10 +13,12 @@ int InsertProcessInfo(struct ProcessControl *pctrl,int arrival_time,int burst_ti
     {
         if(pctrl->size < MAX_SIZE)
         {
-            (pctrl->p_info[pctrl->size]).p_id = pctrl->size;
+            pctrl->p_info[pctrl->size].p_id = pctrl->size;
             pctrl->p_info[pctrl->size].arrival_time = arrival_time;
             pctrl->p_info[pctrl->size].burst_time = burst_time;
             pctrl->p_info[pctrl->size].priority = priority;
+            pctrl->p_info[pctrl->size].wait_time  = 0;
+            pctrl->p_info[pctrl->size].total_execution_time = 0;
             pctrl->size++;
             ret_code = 0;
         }
@@ -26,8 +28,15 @@ int InsertProcessInfo(struct ProcessControl *pctrl,int arrival_time,int burst_ti
 
 int InitializeProcessControl(struct ProcessControl *pctrl)
 {
+    int ret_val = 0;
     if(pctrl != NULL)
     {
         pctrl->size = 0;
     }
+    return ret_val;
+}
+
+void FirstComeFirstServeScheduling(void)
+{
+    
 }

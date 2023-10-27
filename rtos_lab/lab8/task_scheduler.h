@@ -9,6 +9,8 @@ struct ProcessInfo
     int arrival_time;
     int burst_time;
     int priority;
+    int wait_time;
+    int total_execution_time;
 };
 struct ProcessControl
 {
