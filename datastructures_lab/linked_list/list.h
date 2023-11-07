@@ -1,9 +1,9 @@
 #ifndef LIST_HEADER_INCLUDED
 #define LIST_HEADER_INCLUDED
 
-#define INSERT_AT_BEGINING(my_list,data_ptr) (InsertAtBegining(my_list,data_ptr,sizeof(typeof(my_list))))
-#define INSERT_AT_POSITION(my_list,data_ptr,position) (InsertAtPosition(my_list,data_ptr,sizeof(typeof(my_list)),position))
-#define INSERT_AT_END(my_list,data_ptr) (InsertAtEnd(my_list,data_ptr,sizeof(typeof(my_list))))
+#define INSERT_AT_BEGINING(my_list,data_ptr) (InsertAtBegining(my_list,data_ptr,sizeof(typeof(*data_ptr))))
+#define INSERT_AT_POSITION(my_list,data_ptr,position) (InsertAtPosition(my_list,data_ptr,sizeof(typeof(*data_ptr)),position))
+#define INSERT_AT_END(my_list,data_ptr) (InsertAtEnd(my_list,data_ptr,sizeof(typeof(*data_ptr))))
 #define DELETE_AT_END(my_list) (DeleteAtEnd(my_list))
 #define DELETE_AT_BEGINING(my_list) (DeleteAtBegining(my_list))
 
