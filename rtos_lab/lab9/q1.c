@@ -10,8 +10,9 @@ struct ArrayInfo
     int a[10];
     int length;
 };
-pthread_t t1,t2,t3;
+pthread_t t1,t2,t3,t4;
 pthread_mutex_t lock; 
+
 int main()
 {
     pthread_attr_t a1;
@@ -21,16 +22,19 @@ int main()
         return 1; 
     } 
     pthread_create(&t1,&a1,f1,NULL);
-    pthread_create(&t2,&a1,f2,NULL);
-
+    pthread_create(&t2,&a1,f1,NULL);
+    pthread_create(&t3,&a1,f1,NULL);
+    pthread_create(&t4,&a1,f2,NULL);
     pthread_join(t1,NULL);
     pthread_join(t2,NULL);
-  
+    pthread_join(t3,NULL);
+    pthread_join(t4,NULL);
     return 0;
 }
 void* f1(void *ptr)
 {
     pthread_mutex_lock(&lock); 
+    printf("lock  = %d,count = %d,owner = %d\n",lock.__data.__lock,lock.__data.__count,lock.__data.__owner);
     FILE *basefile = fopen("test.txt","r");/*null check*/
     FILE *targetfile = fopen("sample2.txt","w");/*null check*/
     char ch = fgetc(basefile);
@@ -42,6 +46,8 @@ void* f1(void *ptr)
     fclose(basefile);
     fclose(targetfile);
     pthread_mutex_unlock(&lock); 
+    printf("lock  = %d,count = %d,owner = %d\n",lock.__data.__lock,lock.__data.__count,lock.__data.__owner);
+
     return NULL;
 }
 
@@ -49,6 +55,7 @@ void* f2(void *ptr)
 {
     char ch;
     pthread_mutex_lock(&lock); 
+    printf("lock  = %d,count = %d,owner = %d\n",lock.__data.__lock,lock.__data.__count,lock.__data.__owner);
     printf("Enter message ended with new line\n");
     FILE *targetfile = fopen("sample2.txt","a");/*null check*/
     scanf("%c",&ch);
@@ -57,7 +64,9 @@ void* f2(void *ptr)
         fputc(ch,targetfile);
         scanf("%c",&ch);
     }
-    fclose(targetfile);
+    fclose(targetfile); 
     pthread_mutex_unlock(&lock); 
+    printf("lock  = %d,count = %d,owner = %d\n",lock.__data.__lock,lock.__data.__count,lock.__data.__owner);
+
     return NULL;
 }
