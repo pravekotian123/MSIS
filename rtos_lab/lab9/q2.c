@@ -40,6 +40,7 @@ int main(void)
 void *Reader1(void *data)
 {
     pthread_mutex_lock(&lock);
+    printf("rlock  = %d,count = %d,owner = %d\n",lock.__data.__lock,lock.__data.__count,lock.__data.__owner);
     readcount++;
     printf("rc = %d\n",readcount);
     if(readcount == 1)
@@ -71,6 +72,7 @@ void *Reader1(void *data)
 void *Reader2(void *data)
 {
     pthread_mutex_lock(&lock);
+    printf("rlock  = %d,count = %d,owner = %d\n",lock.__data.__lock,lock.__data.__count,lock.__data.__owner);
     readcount++;
     printf("rc = %d\n",readcount);
     if(readcount == 1)
@@ -103,6 +105,7 @@ void *Reader2(void *data)
 void *Reader3(void *data)
 {
     pthread_mutex_lock(&lock);
+    printf("rlock  = %d,count = %d,owner = %d\n",lock.__data.__lock,lock.__data.__count,lock.__data.__owner);
     readcount++;
     printf("rc = %d\n",readcount);
     if(readcount == 1)
@@ -135,6 +138,7 @@ void *Reader3(void *data)
 void *Writer1(void *str)
 {
     pthread_mutex_lock(&sem);
+    printf("wlock  = %d,count = %d,owner = %d\n",sem.__data.__lock,sem.__data.__count,sem.__data.__owner);
     printf("writing 1\n");
     FILE *f = fopen("sample.txt","a");
     for(int i=0;i<25;i++)
@@ -148,6 +152,7 @@ void *Writer1(void *str)
 void *Writer2(void *str)
 {
     pthread_mutex_lock(&sem);
+    printf("wlock  = %d,count = %d,owner = %d\n",sem.__data.__lock,sem.__data.__count,sem.__data.__owner);
     printf("writing 2\n");
     FILE *f = fopen("sample.txt","a");
     for(int i=0;i<10;i++)
